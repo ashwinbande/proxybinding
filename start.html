@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="index.js"></script>
+<body>
+    <div id="app">
+        <input type="text" data-bind="name">
+        <input type="text" data-bind="address.city">
+        <input type="text" data-bind="fullname" data-onclick="">
+    </div>
+<script>
+  const app = new Binding({
+    element: 'app',
+    data: {
+      name: 'Ashwin',
+      surname: 'Bande',
+      address: {
+        city: 'Aurangabad',
+        location: {
+          street: 'Mondha',
+          neighbours: {
+            left: 57,
+            right: 59,
+          }
+        },
+      },
+    },
+    computed: {
+      fullname: {
+        get() {
+          return this.name + ' ' + this.surname;
+        },
+        set(val) {
+          [this.name, this.surname] = val.split(' ');
+        },
+      },
+      newFullname() {
+        return 'new ' + this.fullname;
+      }
+    },
+    watch:{
+      'address.city': function (newVal, oldVal) {
+        console.log('WATCH DETECTED', newVal, oldVal);
+      }
+    },
+    methods: {
+      doSomething(num) {
+        console.log('DID SOMETHING');
+      }
+    }
+  });
+</script>
+</body>
+</html>
