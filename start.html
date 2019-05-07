@@ -4,14 +4,39 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<script src="index.js"></script>
+<script src="vdom.js"></script>
 <body>
     <div id="app">
-        <input type="text" data-bind="name">
-        <input type="text" data-bind="address.city">
+        <demo2 b-model="surname"></demo2>
+        <input type="text" b-model="name"> Hi there
+        <input type="text" b-model="name">
+        <input type="text" b-model="address.city"><input type="text" b-model="address.city">
         <input type="text" data-bind="fullname" data-onclick="">
     </div>
 <script>
+    const demo = {
+      name: 'demo',
+      template: `<span>Hi <b>NEW</b> Component <input type="text" b-model="name"></span>`,
+      data: {name: 'Prasanna',}
+    };
+
+    const demo2 = {
+      name: 'demo2',
+      template: `<div>Hi <b>NEW</b> Demo 2<demo></demo></div>`,
+      data: {name: 'Piu',}
+    };
+
+  const app = new Binding({
+    element: 'app',
+    components: [demo, demo2]
+  });
+
+  console.log(app);
+</script>
+<!--<script>
+components: {
+      demo: `<div>Hi <b>NEW</b> Component</div>`,
+    }
   const app = new Binding({
     element: 'app',
     data: {
@@ -52,6 +77,6 @@
       }
     }
   });
-</script>
+</script>-->
 </body>
 </html>
