@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<script src="vdom.js"></script>
+<script src="vdom2.js"></script>
 <body>
     <div id="app">
         <demo2 b-model="surname"></demo2>
@@ -22,7 +22,7 @@
 
     const demo2 = {
       name: 'demo2',
-      template: `<div>Hi <b>NEW</b> Demo 2<demo></demo></div>`,
+      template: `<div>Hi <b>NEW</b> Demo 2<input type="text" b-model="name"><demo></demo></div>`,
       data: {name: 'Piu',}
     };
 
