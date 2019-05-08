@@ -7,17 +7,30 @@
 <script src="vdom2.js"></script>
 <body>
     <div id="app">
-        <demo2 b-model="surname"></demo2>
-        <input type="text" b-model="name"> Hi there
-        <input type="text" b-model="name">
+        <demo b-model="names"></demo>
+        <demo b-model="surname"></demo>
+
+        <input type="text" b-model="names"> Hi there
+        <input type="text" b-model="names">
         <input type="text" b-model="address.city"><input type="text" b-model="address.city">
         <input type="text" data-bind="fullname" data-onclick="">
     </div>
 <script>
     const demo = {
       name: 'demo',
-      template: `<span>Hi <b>NEW</b> Component <input type="text" b-model="name"></span>`,
-      data: {name: 'Prasanna',}
+      template: `<div>
+Demo Input<input type="text" b-model="name"><br>
+Demo Input<input type="text" b-model="newName"><br>
+</div>`,
+      data: {name: 'Prasanna',},
+      computed: {
+        newName() { return this.name + ' EXT'},
+      },
+      watch: {
+        name(n, o) {
+          console.log('WATCHING', n, o);
+        }
+      }
     };
 
     const demo2 = {
@@ -28,7 +41,13 @@
 
   const app = new Binding({
     element: 'app',
-    components: [demo, demo2]
+    components: [demo],
+    data: {
+      names: 'ashwin',
+      address: {
+        city: 'aurangabad',
+      }
+    }
   });
 
   console.log(app);
